@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='cache-control' content='no-cache'> 
+    <meta http-equiv='expires' content='0'> 
+    <meta http-equiv='pragma' content='no-cache'>    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/timer.js"></script>
+  </head>
+
+  <!--TODO https://github.com/levinunnink/html-form-to-google-sheet
+  https://script.google.com/macros/s/AKfycbzIt9pjNfzwp4P-BW5qxyLc3CGkt6SJJbhrtTT2yvojBVRAOOTurpObI4Xp19MDq6k/exec
+  -->
+  <body>
+    <div style="padding: 20pt;">
+    <p>Hello! And welcome to the data collection site for our 6.8610 (Natural Language Processing) final project. We are studying the effect of using keystroke timing data to supplement NLP password-cracking models (i.e. PassBERT). As you type out the prompts on this website, we will be collecting keystroke timing data. These will not be connected to your personal information in any way. Thanks in advance for your help!</p>
+
+    <p><b>Instructions:</b></p>
+    <ul>
+      <li>You will be asked to type out <i>20 unique passwords</i>, as if you are entering them to log in to a website.</li>
+      <li>You will be asked to type each password <i>3 times</i></li>
+      <li>When you are done typing a password, please press the <i>"Enter"</i> key to proceed.</li>
+      <li>If you make a mistake, we will ask you to try again and this will <i>not</i> count towards the total 3 times.</li>
+      <li>Even if you exit this page before completing all 20 passwords, the data will still be sent to us for the passwords that you did complete.</li>
+    </ul>
+    <p>Passwords completed: </p><p id="pass_count">0</p>
+    <br>
+    <p><b>Your password is...</b></p>
+    <div class="container">
+      <div id="pass_input0" name="pass_input0" style="color:grey" class="overlay"></div>
+      <div id="pass_input1" name="pass_input1" style="color:grey" class="overlay"></div>
+      <div id="pass_input2" name="pass_input2" style="color:grey" class="overlay"></div>
+    </div>
+    <br>
+    <script language="JavaScript">
+    loadFile();
+    init();
+    </script>
+    </div>
+  </body>
+</html>
