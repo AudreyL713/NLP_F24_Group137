@@ -18,31 +18,24 @@ let checkpoint = false;
 
 function loadFile() {
     UUID = crypto.randomUUID();
-    data = getWords("1,2")
-    console.log(data);
-    wordList = wordList.concat(data);
+    getWords("1,2").then(data => {
+        console.log(data);
+        wordList = wordList.concat(data);
+        displayPassword();
+    });
 }
 
-function getWords(rows) {
+async function getWords(rows) {
     try {
         document.getElementById("pass_input0").innerHTML = "Loading words...";
-        fetch(get_url+"?rows="+rows, {
+        const response = await fetch(get_url+"?rows="+rows, {
           method: 'GET', // POST request
-        }).then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json(); // Parse JSON response            
-        })
-        
-        // const response = await fetch(get_url+"?rows="+rows, {
-        //   method: 'GET', // POST request
-        // });
+        });
     
-        // if (!response.ok) {
-        //   throw new Error(`HTTP error! Status: ${response.status}`);
-        // }
-        // return await response.json(); // Parse JSON response
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return await response.json(); // Parse JSON response
       } catch (error) {
         console.error('Error:', error); // Handle error
       }  
@@ -51,6 +44,7 @@ function getWords(rows) {
 function displayNewPassword() {
     if (passwords_completed == -1) {
       loadFile();
+      return null;
     }
 
     passwords_completed++;
@@ -74,20 +68,25 @@ function displayNewPassword() {
         return null;
       }
     }
-    const randomIndex = Math.floor(Math.random() * wordList.length);
-    targetPass = wordList[randomIndex];
-    wordList.splice(randomIndex, 1);
-    console.log(wordList);
-    nextChar = targetPass[0];
-    console.log("Getting new password", targetPass);
-    document.getElementById("pass_input0").innerHTML = targetPass;
-    document.getElementById("pass_input1").innerHTML = "";
-    document.getElementById("pass_input2").innerHTML = "";
 
-    dataList = [];
-    charDict = {};
-    charDict['UUID'] = UUID;
-    charDict['Password'] = targetPass;
+    displayPassword();
+}
+
+function displayPassword() {
+  const randomIndex = Math.floor(Math.random() * wordList.length);
+  targetPass = wordList[randomIndex];
+  wordList.splice(randomIndex, 1);
+  console.log(wordList);
+  nextChar = targetPass[0];
+  console.log("Getting new password", targetPass);
+  document.getElementById("pass_input0").innerHTML = targetPass;
+  document.getElementById("pass_input1").innerHTML = "";
+  document.getElementById("pass_input2").innerHTML = "";
+
+  dataList = [];
+  charDict = {};
+  charDict['UUID'] = UUID;
+  charDict['Password'] = targetPass;
 }
 
 function init()
