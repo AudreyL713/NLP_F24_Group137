@@ -21,12 +21,13 @@ function loadFile() {
     getWords("1,2").then(data => {
         console.log(data);
         wordList = wordList.concat(data);
-        console.log(wordList);
+        displayNewPassword();
     });
 }
 
 async function getWords(rows) {
     try {
+        document.getElementById("pass_input0").innerHTML = "Loading words...";
         const response = await fetch(get_url+"?rows="+rows, {
           method: 'GET', // POST request
         });
@@ -34,7 +35,6 @@ async function getWords(rows) {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        document.getElementById("pass_input0").innerHTML = "Press 'Enter' to receive your first password";
         return await response.json(); // Parse JSON response
       } catch (error) {
         console.error('Error:', error); // Handle error
@@ -42,13 +42,20 @@ async function getWords(rows) {
 }
 
 function displayNewPassword() {
+    if (passwords_completed == -1) {
+      loadFile();
+      return null;
+    }
+
     passwords_completed++;
     document.getElementById("pass_count").innerHTML = passwords_completed;
     if (wordList.length === 0) {
       if (passwords_completed >= passwords_goal) {
         checkpoint = true;
         passwords_goal = 4;
-        passwords_completed = 0;
+        passwords_completed = -1;
+        charTyped = 0;
+        targetPass = "";
         document.getElementById("pass_input0").innerHTML = "Thank you for completing this survey! If you would like to keep going, please click 'Enter' and we will provide you with 10 more paswords!"
         document.getElementById("pass_input1").innerHTML = "";
         document.getElementById("pass_input2").innerHTML = "";
