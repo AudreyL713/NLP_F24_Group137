@@ -24,17 +24,26 @@ function loadFile() {
     });
 }
 
-async function getWords(rows) {
+function getWords(rows) {
     try {
         document.getElementById("pass_input0").innerHTML = "Loading words...";
-        const response = await fetch(get_url+"?rows="+rows, {
+        fetch(get_url+"?rows="+rows, {
           method: 'GET', // POST request
-        });
+        }).then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json(); // Parse JSON response            
+        })
+        
+        // const response = await fetch(get_url+"?rows="+rows, {
+        //   method: 'GET', // POST request
+        // });
     
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return await response.json(); // Parse JSON response
+        // if (!response.ok) {
+        //   throw new Error(`HTTP error! Status: ${response.status}`);
+        // }
+        // return await response.json(); // Parse JSON response
       } catch (error) {
         console.error('Error:', error); // Handle error
       }  
