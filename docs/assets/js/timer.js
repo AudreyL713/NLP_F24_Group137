@@ -18,10 +18,9 @@ let checkpoint = false;
 
 function loadFile() {
     UUID = crypto.randomUUID();
-    getWords("1,2").then(data => {
-        console.log(data);
-        wordList = wordList.concat(data);
-    });
+    data = getWords("1,2")
+    console.log(data);
+    wordList = wordList.concat(data);
 }
 
 function getWords(rows) {
