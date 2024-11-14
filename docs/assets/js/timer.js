@@ -21,7 +21,6 @@ function loadFile() {
     getWords("1,2").then(data => {
         console.log(data);
         wordList = wordList.concat(data);
-        displayNewPassword();
     });
 }
 
@@ -44,7 +43,6 @@ async function getWords(rows) {
 function displayNewPassword() {
     if (passwords_completed == -1) {
       loadFile();
-      return null;
     }
 
     passwords_completed++;
