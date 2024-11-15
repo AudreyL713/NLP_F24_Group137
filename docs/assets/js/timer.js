@@ -16,9 +16,9 @@ let passwords_completed = -1;
 let passwords_goal = 20;
 let checkpoint = false;
 
-function loadFile() {
+function loadFile(rows) {
     UUID = crypto.randomUUID();
-    getWords("1,2").then(data => {
+    getWords(rows).then(data => {
         console.log(data);
         wordList = wordList.concat(data);
         displayPassword();
@@ -43,7 +43,12 @@ async function getWords(rows) {
 
 function displayNewPassword() {
     if (passwords_completed == -1) {
-      loadFile();
+      if (checkpoint) {
+        checkpoint = false;
+        loadFile("1");
+      } else {
+        loadFile("1,2");
+      }
       passwords_completed = 0;
       return null;
     }
