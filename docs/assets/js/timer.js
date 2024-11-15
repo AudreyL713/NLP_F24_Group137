@@ -15,6 +15,8 @@ let mustRedo = false;
 let passwords_completed = -1;
 let passwords_goal = 20;
 let checkpoint = false;
+let kyt = [];
+let kyk = [];
 
 function loadFile(rows) {
     UUID = crypto.randomUUID();
@@ -168,6 +170,8 @@ function keyup(e)
 {
     if (!e) e= event;
     charDict['keyup'] = performance.now();
+    kyt.push(performance.now());
+    kyk.push(e.key);
     return suppressdefault(e,false);
 }
 
