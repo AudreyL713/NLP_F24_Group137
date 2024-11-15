@@ -10,6 +10,9 @@ let UUID = null;
 const post_url = "https://script.google.com/macros/s/AKfycbwowQAsWeyj7yi_hJ0amCg5lmWFSLp9ARTP1f111xEfPpVj4tQ1KjW0kbtkP_XDow/exec";
 const get_url = "https://script.google.com/macros/s/AKfycbyew5fZh48bbc_2Rc5bTri_VMndiSziF2r7YX8-E37XScKNmvdZ9rYB9lNkK0xH84dc/exec";
 let dataList = [];
+let keyups = [];
+let keydowns = [];
+let keypresses = [];
 let charDict = {};
 let mustRedo = false;
 let passwords_completed = -1;
@@ -160,21 +163,21 @@ function suppressdefault(e,flag)
 function keydown(e)
 {
    if (!e) e= event;
-   charDict['keydown'] = performance.now();
+   keydowns.append(performance.now()); // charDict['keydown'] = performance.now();
    return suppressdefault(e,false);
 }
 
 function keyup(e)
 {
     if (!e) e= event;
-    charDict['keyup'] = performance.now();
+    keyups.append(performance.now()); // charDict['keyup'] = performance.now();
     return suppressdefault(e,false);
 }
 
 function keypress(e)
 {
   if (!e) e= event;
-  charDict['keypress'] = performance.now();
+  keypresses.append(performance.now()); // charDict['keypress'] = performance.now();
   handleWebsite(e).then();
   return suppressdefault(e,true);
 }
@@ -191,7 +194,11 @@ async function handleWebsite(e) {
     start_time = 0;
     charTyped = 0;
     if (timesTyped >= maxTimes) {
-        postData({ key: 'value' })
+      console.log(keypresses.length);
+      console.log(keydowns.length);
+      console.log(keyups.length);
+
+        postData()
         .then(data => console.log(data));
         console.log(dataList);
         displayNewPassword();
