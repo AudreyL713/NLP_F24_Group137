@@ -44,11 +44,12 @@ async function getWords(rows) {
 function displayNewPassword() {
     if (passwords_completed == -1) {
       loadFile();
+      passwords_completed = 0;
       return null;
     }
-
     passwords_completed++;
     document.getElementById("pass_count").innerHTML = passwords_completed;
+
     if (wordList.length === 0) {
       if (passwords_completed >= passwords_goal) {
         checkpoint = true;
