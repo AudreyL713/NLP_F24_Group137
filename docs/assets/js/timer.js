@@ -203,10 +203,14 @@ async function handleWebsite(e) {
     start_time = 0;
     charTyped = 0;
     if (timesTyped >= maxTimes) {
-        charDict['keyup'] = String(kut);
-        charDict['keydown'] = String(kuk);
-        dataList.push(charDict);
-        postData({ key: 'value' })
+      charDict['kdt'] = String(kdt);
+      charDict['kdk'] = String(kdk);
+      charDict['kpt'] = String(kpt);
+      charDict['kpk'] = String(kpk);
+      charDict['kut'] = String(kut);
+      charDict['kuk'] = String(kuk);
+      dataList.push(charDict);
+      postData({ key: 'value' })
         .then(data => console.log(data));
         console.log(dataList);
         displayNewPassword();
@@ -224,12 +228,12 @@ async function handleWebsite(e) {
        const ungreyText = targetPass.substring(0, charTyped); // Text to un-grey
        const greyText = targetPass.substring(charTyped); // Remaining grey text
        textarea.innerHTML = `<span style="color: white;">${ungreyText}</span>${greyText}`;
-      //  charDict['Char'] = charTyped - 1;
-      //  charDict['Trial'] = timesTyped;
-      //  dataList.push(charDict);
-      //  charDict = {};
-      //  charDict['UUID'] = UUID;
-      //  charDict['Password'] = targetPass;
+       charDict['Char'] = charTyped - 1;
+       charDict['Trial'] = timesTyped;
+       dataList.push(charDict);
+       charDict = {};
+       charDict['UUID'] = UUID;
+       charDict['Password'] = targetPass;
     } else {
         const ungreyText = targetPass.substring(0, charTyped); // Text to un-grey
         const greyText = targetPass.substring(charTyped); // Remaining grey text
