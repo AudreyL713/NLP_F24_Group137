@@ -141,7 +141,9 @@ function keymesg(w,e)
     //         ' keyCode=' + keyval(e.keyCode) +
 	  //         ' which=' + keyval(e.which) +
     //         ' charCode=' + keyval(e.charCode) + (pressTime));
-
+    if (w in charDict) {
+      return null;
+    }
     charDict[w] = pressTime;
 }
 
