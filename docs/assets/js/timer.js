@@ -62,6 +62,7 @@ function displayNewPassword() {
         passwords_completed = -1;
         charTyped = 0;
         targetPass = "";
+        timesTyped = maxTimes;
         document.getElementById("pass_input0").innerHTML = "Thank you for completing this survey! If you would like to keep going, please click 'Enter' and we will provide you with 10 more paswords!"
         document.getElementById("pass_input1").innerHTML = "";
         document.getElementById("pass_input2").innerHTML = "";
@@ -174,35 +175,35 @@ function keyup(e)
 {
     if (!e) e= event;
     keymesg('keyup',e);
+    if (charTyped >= targetPass.length && e.key === 'Enter') {
+      timesTyped++;
+      start_time = 0;
+      charTyped = 0;
+      if (timesTyped >= maxTimes) {
+          postData({ key: 'value' })
+          .then(data => console.log(data));
+          console.log(dataList);
+          displayNewPassword();
+          timesTyped = 0;
+      } else {
+          document.getElementById("pass_input" + timesTyped.toString()).innerHTML = targetPass;
+      }
+    }
     return suppressdefault(e,false);
 }
 
 function keypress(e)
 {
-   if (!e) e= event;
-   keymesg('keypress',e);
-   if (mustRedo) {
-    if (e.key === 'Enter') {
-        const textarea = document.getElementById('pass_input' + timesTyped.toString());
-        textarea.innerHTML = targetPass;
-        mustRedo = false;
-    } 
-    return suppressdefault(e,true);
-   }
+  if (!e) e= event;
+  keymesg('keypress',e);
+  handleWebsite(e).then();
+  return suppressdefault(e,true);
+}
 
-   if (e.key === 'Enter' && charTyped >= targetPass.length) {
-    timesTyped++;
-    start_time = 0;
-    charTyped = 0;
-    if (timesTyped >= maxTimes) {
-        postData({ key: 'value' })
-        .then(data => console.log(data));
-        console.log(dataList);
-        displayNewPassword();
-        timesTyped = 0;
-    } else {
-        document.getElementById("pass_input" + timesTyped.toString()).innerHTML = targetPass;
-    }
+async function handleWebsite(e) {
+  if (e.key === 'Enter' && mustRedo) {
+    document.getElementById('pass_input' + timesTyped.toString()).innerHTML = targetPass;
+    mustRedo = false;
     return suppressdefault(e,true);
    }
 
@@ -241,7 +242,6 @@ function keypress(e)
         console.log(dataList);
         console.log("Incorrect! " + e.key);
     }
-  return suppressdefault(e,true);
 }
 
 function textinput(e)
