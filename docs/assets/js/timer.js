@@ -69,7 +69,7 @@ function displayNewPassword() {
         charTyped = 0;
         targetPass = "";
         timesTyped = maxTimes;
-        document.getElementById("pass_input0").innerHTML = "Thank you for completing this survey! If you would like to keep going, please click 'Enter' and we will provide you with 10 more paswords!"
+        document.getElementById("pass_input0").innerHTML = "Thank you for completing this survey! If you would like to keep going, please click 'Enter' and we will provide you with 10 more paswords! \nOtherwise, please feel free to exit this webpage now. Thanks again!"
         document.getElementById("pass_input1").innerHTML = "";
         document.getElementById("pass_input2").innerHTML = "";
         return null;
