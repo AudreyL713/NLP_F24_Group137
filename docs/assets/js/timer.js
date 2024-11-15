@@ -13,7 +13,7 @@ let dataList = [];
 let charDict = {};
 let mustRedo = false;
 let passwords_completed = -1;
-let passwords_goal = 8;
+let passwords_goal = 20;
 let checkpoint = false;
 
 function loadFile() {
@@ -52,7 +52,7 @@ function displayNewPassword() {
     if (wordList.length === 0) {
       if (passwords_completed >= passwords_goal) {
         checkpoint = true;
-        passwords_goal = 4;
+        passwords_goal = 10;
         passwords_completed = -1;
         charTyped = 0;
         targetPass = "";
