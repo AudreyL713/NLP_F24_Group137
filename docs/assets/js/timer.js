@@ -175,20 +175,7 @@ function keyup(e)
 {
     if (!e) e= event;
     keymesg('keyup',e);
-    // if (charTyped >= targetPass.length && e.key === 'Enter') {
-    //   timesTyped++;
-    //   start_time = 0;
-    //   charTyped = 0;
-    //   if (timesTyped >= maxTimes) {
-    //       postData({ key: 'value' })
-    //       .then(data => console.log(data));
-    //       console.log(dataList);
-    //       displayNewPassword();
-    //       timesTyped = 0;
-    //   } else {
-    //       document.getElementById("pass_input" + timesTyped.toString()).innerHTML = targetPass;
-    //   }
-    // }
+    handleWebsite(e).then();
     return suppressdefault(e,false);
 }
 
@@ -196,7 +183,6 @@ function keypress(e)
 {
   if (!e) e= event;
   keymesg('keypress',e);
-  // handleWebsite(e).then();
   return suppressdefault(e,true);
 }
 
@@ -208,7 +194,18 @@ async function handleWebsite(e) {
   }
 
   if (charTyped >= targetPass.length && e.key === 'Enter') {
-    return suppressdefault(e, true);
+    timesTyped++;
+    start_time = 0;
+    charTyped = 0;
+    if (timesTyped >= maxTimes) {
+        postData({ key: 'value' })
+        .then(data => console.log(data));
+        console.log(dataList);
+        displayNewPassword();
+        timesTyped = 0;
+    } else {
+        document.getElementById("pass_input" + timesTyped.toString()).innerHTML = targetPass;
+    }
   }
 
    const textarea = document.getElementById('pass_input' + timesTyped.toString());
