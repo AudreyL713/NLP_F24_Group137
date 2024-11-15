@@ -132,14 +132,11 @@ function keyval(n)
 
 function keymesg(w,e)
 {
-    if (start_time === 0 && e.key === nextChar) {
-        start_time = performance.now();
-    }
-    var pressTime = performance.now() - start_time;
-	  console.log(
-            ' keyCode=' + keyval(e.keyCode) +
-	          ' which=' + keyval(e.which) +
-            ' charCode=' + keyval(e.charCode) + (pressTime));
+    var pressTime = performance.now();
+	  // console.log(
+    //         ' keyCode=' + keyval(e.keyCode) +
+	  //         ' which=' + keyval(e.which) +
+    //         ' charCode=' + keyval(e.charCode) + (pressTime));
     if (w in charDict) {
       return null;
     }
