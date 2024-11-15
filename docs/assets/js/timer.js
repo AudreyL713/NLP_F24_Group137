@@ -203,8 +203,8 @@ async function handleWebsite(e) {
     start_time = 0;
     charTyped = 0;
     if (timesTyped >= maxTimes) {
-        charDict['keyup'] = kut;
-        charDict['keydown'] = kuk;
+        charDict['keyup'] = String(kut);
+        charDict['keydown'] = String(kuk);
         dataList.push(charDict);
         postData({ key: 'value' })
         .then(data => console.log(data));
