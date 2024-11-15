@@ -81,7 +81,7 @@ function displayNewPassword() {
 
 function displayPassword() {
   const randomIndex = Math.floor(Math.random() * wordList.length);
-  targetPass = wordList[randomIndex];
+  targetPass = String(wordList[randomIndex]);
   wordList.splice(randomIndex, 1);
   console.log(wordList);
   nextChar = targetPass[0];
