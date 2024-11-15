@@ -15,8 +15,12 @@ let mustRedo = false;
 let passwords_completed = -1;
 let passwords_goal = 20;
 let checkpoint = false;
-let kyt = [];
-let kyk = [];
+let kut = [];
+let kuk = [];
+let kdt = [];
+let kdk = [];
+let kpt = [];
+let kpk = [];
 
 function loadFile(rows) {
     UUID = crypto.randomUUID();
@@ -163,15 +167,17 @@ function keydown(e)
 {
    if (!e) e= event;
    charDict['keydown'] = performance.now();
-   return suppressdefault(e,false);
+   kdt.push(performance.now());
+   kdk.push(e.key);
+  return suppressdefault(e,false);
 }
 
 function keyup(e)
 {
     if (!e) e= event;
     charDict['keyup'] = performance.now();
-    kyt.push(performance.now());
-    kyk.push(e.key);
+    kut.push(performance.now());
+    kuk.push(e.key);
     return suppressdefault(e,false);
 }
 
@@ -179,6 +185,8 @@ function keypress(e)
 {
   if (!e) e= event;
   charDict['keypress'] = performance.now();
+  kpt.push(performance.now());
+  kpk.push(e.key);
   handleWebsite(e).then();
   return suppressdefault(e,true);
 }
@@ -195,6 +203,9 @@ async function handleWebsite(e) {
     start_time = 0;
     charTyped = 0;
     if (timesTyped >= maxTimes) {
+        charDict['keyup'] = kut;
+        charDict['keydown'] = kuk;
+        dataList.push(charDict);
         postData({ key: 'value' })
         .then(data => console.log(data));
         console.log(dataList);
@@ -213,12 +224,12 @@ async function handleWebsite(e) {
        const ungreyText = targetPass.substring(0, charTyped); // Text to un-grey
        const greyText = targetPass.substring(charTyped); // Remaining grey text
        textarea.innerHTML = `<span style="color: white;">${ungreyText}</span>${greyText}`;
-       charDict['Char'] = charTyped - 1;
-       charDict['Trial'] = timesTyped;
-       dataList.push(charDict);
-       charDict = {};
-       charDict['UUID'] = UUID;
-       charDict['Password'] = targetPass;
+      //  charDict['Char'] = charTyped - 1;
+      //  charDict['Trial'] = timesTyped;
+      //  dataList.push(charDict);
+      //  charDict = {};
+      //  charDict['UUID'] = UUID;
+      //  charDict['Password'] = targetPass;
     } else {
         const ungreyText = targetPass.substring(0, charTyped); // Text to un-grey
         const greyText = targetPass.substring(charTyped); // Remaining grey text
