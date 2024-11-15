@@ -137,10 +137,10 @@ function keymesg(w,e)
     // }
     var pressTime = performance.now();
     // var head= [w, '        '];
-	  // console.log(
-    //         ' keyCode=' + keyval(e.keyCode) +
-	  //         ' which=' + keyval(e.which) +
-    //         ' charCode=' + keyval(e.charCode) + (pressTime));
+	  console.log(
+            ' keyCode=' + keyval(e.keyCode) +
+	          ' which=' + keyval(e.which) +
+            ' charCode=' + keyval(e.charCode) + (pressTime));
     if (w in charDict) {
       return null;
     }
@@ -175,20 +175,20 @@ function keyup(e)
 {
     if (!e) e= event;
     keymesg('keyup',e);
-    if (charTyped >= targetPass.length && e.key === 'Enter') {
-      timesTyped++;
-      start_time = 0;
-      charTyped = 0;
-      if (timesTyped >= maxTimes) {
-          postData({ key: 'value' })
-          .then(data => console.log(data));
-          console.log(dataList);
-          displayNewPassword();
-          timesTyped = 0;
-      } else {
-          document.getElementById("pass_input" + timesTyped.toString()).innerHTML = targetPass;
-      }
-    }
+    // if (charTyped >= targetPass.length && e.key === 'Enter') {
+    //   timesTyped++;
+    //   start_time = 0;
+    //   charTyped = 0;
+    //   if (timesTyped >= maxTimes) {
+    //       postData({ key: 'value' })
+    //       .then(data => console.log(data));
+    //       console.log(dataList);
+    //       displayNewPassword();
+    //       timesTyped = 0;
+    //   } else {
+    //       document.getElementById("pass_input" + timesTyped.toString()).innerHTML = targetPass;
+    //   }
+    // }
     return suppressdefault(e,false);
 }
 
@@ -196,7 +196,7 @@ function keypress(e)
 {
   if (!e) e= event;
   keymesg('keypress',e);
-  handleWebsite(e).then();
+  // handleWebsite(e).then();
   return suppressdefault(e,true);
 }
 
