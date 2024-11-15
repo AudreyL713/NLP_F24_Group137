@@ -209,13 +209,19 @@ async function handleWebsite(e) {
       charDict['kpk'] = String(kpk);
       charDict['kut'] = String(kut);
       charDict['kuk'] = String(kuk);
+      kdt = [];
+      kdk = [];
+      kpt = [];
+      kpk = [];
+      kut = [];
+      kuk = [];
       dataList.push(charDict);
       postData({ key: 'value' })
         .then(data => console.log(data));
         console.log(dataList);
         displayNewPassword();
         timesTyped = 0;
-    } else {
+      } else {
         document.getElementById("pass_input" + timesTyped.toString()).innerHTML = targetPass;
     }
     return suppressdefault(e,true);
