@@ -132,17 +132,15 @@ function keyval(n)
 
 function keymesg(w,e)
 {
-    if (start_time === 0 && e.key === nextChar) {
-        start_time = performance.now();
-    }
-    var pressTime = performance.now() - start_time;
-    var row= 0;
-    var head= [w, '        '];
-	console.log(head[row] +
-            ' keyCode=' + keyval(e.keyCode) +
-	    ' which=' + keyval(e.which) +
-            ' charCode=' + keyval(e.charCode) + (pressTime));
-	row= 1;
+    // if (start_time === 0 && e.key === nextChar) {
+    //     start_time = performance.now();
+    // }
+    var pressTime = performance.now();
+    // var head= [w, '        '];
+	  // console.log(
+    //         ' keyCode=' + keyval(e.keyCode) +
+	  //         ' which=' + keyval(e.which) +
+    //         ' charCode=' + keyval(e.charCode) + (pressTime));
 
     charDict[w] = pressTime;
 }
