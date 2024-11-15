@@ -130,15 +130,15 @@ function keyval(n)
     return s;
 }
 
-function keymesg(w,e)
-{
-    var pressTime = performance.now();
-	  // console.log(
-    //         ' keyCode=' + keyval(e.keyCode) +
-	  //         ' which=' + keyval(e.which) +
-    //         ' charCode=' + keyval(e.charCode) + (pressTime));
-    charDict[w] = pressTime;
-}
+// function keymesg(w,e)
+// {
+//     var pressTime = performance.now();
+// 	  // console.log(
+//     //         ' keyCode=' + keyval(e.keyCode) +
+// 	  //         ' which=' + keyval(e.which) +
+//     //         ' charCode=' + keyval(e.charCode) + (pressTime));
+//     charDict[w] = pressTime;
+// }
 
 function pad(n,s)
 {
@@ -160,21 +160,21 @@ function suppressdefault(e,flag)
 function keydown(e)
 {
    if (!e) e= event;
-   keymesg('keydown',e);
+   charDict['keydown'] = performance.now();
    return suppressdefault(e,false);
 }
 
 function keyup(e)
 {
     if (!e) e= event;
-    keymesg('keyup',e);
+    charDict['keyup'] = performance.now();
     return suppressdefault(e,false);
 }
 
 function keypress(e)
 {
   if (!e) e= event;
-  keymesg('keypress',e);
+  charDict['keypress'] = performance.now();
   handleWebsite(e).then();
   return suppressdefault(e,true);
 }
