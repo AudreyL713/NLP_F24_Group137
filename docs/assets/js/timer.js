@@ -132,11 +132,10 @@ function keyval(n)
 
 function keymesg(w,e)
 {
-    // if (start_time === 0 && e.key === nextChar) {
-    //     start_time = performance.now();
-    // }
-    var pressTime = performance.now();
-    // var head= [w, '        '];
+    if (start_time === 0 && e.key === nextChar) {
+        start_time = performance.now();
+    }
+    var pressTime = performance.now() - start_time;
 	  console.log(
             ' keyCode=' + keyval(e.keyCode) +
 	          ' which=' + keyval(e.which) +
@@ -175,7 +174,6 @@ function keyup(e)
 {
     if (!e) e= event;
     keymesg('keyup',e);
-    handleWebsite(e).then();
     return suppressdefault(e,false);
 }
 
@@ -183,6 +181,7 @@ function keypress(e)
 {
   if (!e) e= event;
   keymesg('keypress',e);
+  handleWebsite(e).then();
   return suppressdefault(e,true);
 }
 
