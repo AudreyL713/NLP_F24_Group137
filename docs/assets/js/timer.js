@@ -205,7 +205,11 @@ async function handleWebsite(e) {
     document.getElementById('pass_input' + timesTyped.toString()).innerHTML = targetPass;
     mustRedo = false;
     return suppressdefault(e,true);
-   }
+  }
+
+  if (charTyped >= targetPass.length && e.key === 'Enter') {
+    return suppressdefault(e, true);
+  }
 
    const textarea = document.getElementById('pass_input' + timesTyped.toString());
    nextChar = targetPass[charTyped];
