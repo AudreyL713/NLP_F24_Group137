@@ -206,6 +206,7 @@ async function handleWebsite(e) {
     } else {
         document.getElementById("pass_input" + timesTyped.toString()).innerHTML = targetPass;
     }
+    return suppressdefault(e,true);
   }
 
    const textarea = document.getElementById('pass_input' + timesTyped.toString());
