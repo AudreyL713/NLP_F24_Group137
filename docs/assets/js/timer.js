@@ -219,8 +219,8 @@ async function handleWebsite(e) {
       postData({ key: 'value' })
         .then(data => console.log(data));
         console.log(dataList);
-        displayNewPassword();
         timesTyped = 0;
+        displayNewPassword();
       } else {
         document.getElementById("pass_input" + timesTyped.toString()).innerHTML = targetPass;
     }
